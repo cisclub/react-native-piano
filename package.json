@@ -1,8 +1,8 @@
 {
   "name": "react-native-piano-composer",
   "title": "React Native Piano Composer",
-  "version": "1.0.0",
-  "description": "TODO",
+  "version": "0.0.1",
+  "description": "React Native wrapper for Piano Composer",
   "main": "index.js",
   "files": [
     "README.md",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-piano-composer.git",
-    "baseUrl": "https://github.com/github_account/react-native-piano-composer"
+    "url": "git+https://github.com/cisclub/react-native-piano-composer.git",
+    "baseUrl": "https://github.com/cisclub/react-native-piano-composer"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "cisclub",
+    "email": ""
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
