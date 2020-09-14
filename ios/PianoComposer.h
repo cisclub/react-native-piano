@@ -1,5 +1,5 @@
 #import <React/RCTBridgeModule.h>
 
-@interface PianoComposer : NSObject <RCTBridgeModule>
+@interface RNPianoComposer : NSObject <RCTBridgeModule>
 
 @end
