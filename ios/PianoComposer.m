@@ -11,9 +11,9 @@ RCT_EXPORT_METHOD(executeWithAID:(NSString *)AID
                   tags:(nullable NSSet *)tags
                   zoneID:(nullable NSString *)zoneID
                   referrer:(nullable NSString *)referrer
-                  url:(NSString *)url
-                  customVariables:(NSDictionary *)customnVariables
-                  userToken:(NSString *)userToken)
+                  url:(nullable NSString *)url
+                  customVariables:(nullable NSDictionary *)customnVariables
+                  userToken:(nullable NSString *)userToken)
 {
     PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     
