@@ -11,15 +11,7 @@ const PianoComposer = {
     url: String = null,
     customVariables: Dictionary = null,
     userToken: String = null,
-    showLoginHandler = () => {},
-    showTemplateHandler = () => {},
-    userSegmentTrueHandler = () => {},
-    userSegmentFalseHandler = () => {},
-    meterActiveHandler = () => {},
-    meterExpiredComposer = () => {},
-    experienceExecuteHandler = () => {},
-    experienceExecutionFailedHandler = () => {},
-    composerExecutionCompletedHandler = () => {}
+    showLoginHandler = () => {}
     ) {
         PianoComposerModule.executeWithAID(
             aid,
@@ -30,15 +22,7 @@ const PianoComposer = {
             url,
             customVariables,
             userToken,
-            showLoginHandler,
-            showTemplateHandler,
-            userSegmentTrueHandler,
-            userSegmentFalseHandler,
-            meterActiveHandler,
-            meterExpiredComposer,
-            experienceExecuteHandler,
-            experienceExecutionFailedHandler,
-            composerExecutionCompletedHandler
+            showLoginHandler
             );
     }
 }
