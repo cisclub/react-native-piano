@@ -12,6 +12,7 @@ const PianoComposer = {
     customVariables: Dictionary = null,
     userToken: String = null,
     showLoginHandler = () => {}
+    showTemplateHandler = () => {}
     ) {
         PianoComposerModule.executeWithAID(
             aid,
@@ -22,7 +23,8 @@ const PianoComposer = {
             url,
             customVariables,
             userToken,
-            showLoginHandler
+            showLoginHandler,
+            showTemplateHandler
             );
     }
 }
