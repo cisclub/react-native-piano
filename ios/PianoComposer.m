@@ -22,11 +22,13 @@ RCT_EXPORT_METHOD(
                   customVariables:(nullable NSDictionary *)customnVariables
                   userToken:(nullable NSString *)userToken
                   showLoginHandler:(RCTResponseSenderBlock)showLoginHandler
+                  showTemplateHandler:(RCTResponseSenderBlock)showTemplateHandler
                   )
 {
     PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     
     [self setShowLoginHandler:showLoginHandler];
+    [self setShowTemplateHandler:showTemplateHandler];
     
     [composer setDelegate:self];
     
@@ -59,6 +61,7 @@ RCT_EXPORT_METHOD(
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
+    SEL.showTemplateHandler(@[]);
 }
 
 -(void)userSegmentTrueWithComposer:(PianoComposer *)composer event:(XpEvent *)event {
