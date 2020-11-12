@@ -51,6 +51,18 @@ RCT_EXPORT_METHOD(
         [composer setUserToken:userToken];
     }
     
+    if (contentAuthor != nil) {
+        [composer setContentAuthor:contentAuthor];
+    }
+       
+    if (contentCreated != nil) {
+        [composer setContentCreated:contentCreated];
+    }
+       
+    if (contentSection != nil) {
+        [composer setContentSection:contentSection];
+    }
+    
     [composer execute];
 }
 
