@@ -9,9 +9,12 @@ const PianoComposer = {
     zoneID: String = null,
     referrer: String = null,
     url: String = null,
+    contentAuthor: String = null,
+    contentCreated: String = null,
+    contentSection: String = null,
     customVariables: Dictionary = null,
     userToken: String = null,
-    showLoginHandler = () => {}
+    showLoginHandler = () => {},
     showTemplateHandler = () => {}
     ) {
         PianoComposerModule.executeWithAID(
@@ -21,6 +24,9 @@ const PianoComposer = {
             zoneID,
             referrer,
             url,
+            contentAuthor,
+            contentCreated,
+            contentSection,
             customVariables,
             userToken,
             showLoginHandler,
