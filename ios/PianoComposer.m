@@ -61,7 +61,7 @@ RCT_EXPORT_METHOD(
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
-    SEL.showTemplateHandler(@[]);
+    self.showTemplateHandler(@[]);
 }
 
 -(void)userSegmentTrueWithComposer:(PianoComposer *)composer event:(XpEvent *)event {
