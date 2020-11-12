@@ -9,6 +9,7 @@
 @implementation RNPianoComposer
 
 @synthesize showLoginHandler;
+@synthesize showTemplateHandler;
 
 RCT_EXPORT_MODULE(PianoComposer)
 
