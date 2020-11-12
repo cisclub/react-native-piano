@@ -19,6 +19,9 @@ RCT_EXPORT_METHOD(
                   zoneID:(nullable NSString *)zoneID
                   referrer:(nullable NSString *)referrer
                   url:(nullable NSString *)url
+                  contentAuthor:(nullable NSString *)contentAuthor
+                  contentCreated:(nullable NSString *)contentCreated
+                  contentSection:(nullable NSString *)contentSection
                   customVariables:(nullable NSDictionary *)customnVariables
                   userToken:(nullable NSString *)userToken
                   showLoginHandler:(RCTResponseSenderBlock)showLoginHandler
