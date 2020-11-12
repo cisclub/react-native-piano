@@ -61,6 +61,8 @@ RCT_EXPORT_METHOD(
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
+    PianoShowTemplateController *showTemplate = [[PianoShowTemplateController alloc] initWithParams:params];
+    [showTemplate show];
     self.showTemplateHandler(@[]);
 }
 
