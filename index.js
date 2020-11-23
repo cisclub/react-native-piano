@@ -14,8 +14,7 @@ const PianoComposer = {
     contentSection: String = null,
     customVariables: Dictionary = null,
     userToken: String = null,
-    showLoginHandler = () => {},
-    showTemplateHandler = () => {}
+    handlers: Array = []
     ) {
         PianoComposerModule.executeWithAID(
             aid,
@@ -29,8 +28,7 @@ const PianoComposer = {
             contentSection,
             customVariables,
             userToken,
-            showLoginHandler,
-            showTemplateHandler
+            handlers
             );
     }
 }
