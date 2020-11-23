@@ -10,6 +10,7 @@
 
 @synthesize showLoginHandler;
 @synthesize showTemplateHandler;
+@synthesize eventParameters;
 
 RCT_EXPORT_MODULE(PianoComposer)
 
@@ -29,10 +30,11 @@ RCT_EXPORT_METHOD(
                   showTemplateHandler:(RCTResponseSenderBlock)showTemplateHandler
                   )
 {
-    PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
-    
+    [self setEventParameters:[NSMutableDictionary new]];
     [self setShowLoginHandler:showLoginHandler];
     [self setShowTemplateHandler:showTemplateHandler];
+
+    PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     
     [composer setDelegate:self];
     
@@ -77,9 +79,12 @@ RCT_EXPORT_METHOD(
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
+    
+    [self.eventParameters setObject:@(params.showCloseButton) forKey:@"showCloseButton"];
+    
     PianoShowTemplateController *showTemplate = [[PianoShowTemplateController alloc] initWithParams:params];
     [showTemplate show];
-    self.showTemplateHandler(@[]);
+    self.showTemplateHandler(@[self.eventParameters]);
 }
 
 -(void)userSegmentTrueWithComposer:(PianoComposer *)composer event:(XpEvent *)event {
@@ -89,6 +94,12 @@ RCT_EXPORT_METHOD(
 }
 
 -(void)meterActiveWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(PageViewMeterEventParams *)params {
+    
+    [self.eventParameters setObject:params.meterName forKey:@"meterName"];
+    [self.eventParameters setObject:@(params.views) forKey:@"views"];
+    [self.eventParameters setObject:@(params.viewsLeft) forKey:@"viewsLeft"];
+    [self.eventParameters setObject:@(params.maxViews) forKey:@"maxViews"];
+    [self.eventParameters setObject:@(params.totalViews) forKey:@"totalViews"];
 }
 
 -(void)meterExpiredWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(PageViewMeterEventParams *)params {
