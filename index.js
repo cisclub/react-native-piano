@@ -1,6 +1,7 @@
-import { NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 
 const PianoComposerModule = NativeModules.PianoComposer;
+const eventEmitter = new NativeEventEmitter(PianoComposerModule)
 
 const PianoComposer = {
     execute(aid: String,
@@ -13,8 +14,7 @@ const PianoComposer = {
     contentCreated: String = null,
     contentSection: String = null,
     customVariables: Dictionary = null,
-    userToken: String = null,
-    handlers: Array = []
+    userToken: String = null
     ) {
         PianoComposerModule.executeWithAID(
             aid,
@@ -27,10 +27,16 @@ const PianoComposer = {
             contentCreated,
             contentSection,
             customVariables,
-            userToken,
-            handlers
+            userToken
             );
-    }
+    },
+
+    addEventListener(callback = () => {}) {
+        const subscribe = eventEmitter.addListener(PianoComposerModule.eventName, callback);
+        return () => {
+            subscribe.remove();
+        };
+    },
 }
 
 export default PianoComposer;

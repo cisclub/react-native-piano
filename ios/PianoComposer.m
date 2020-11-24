@@ -2,15 +2,18 @@
 
 @import PianoComposer;
 
-@interface RNPianoComposer (PianoDelegate) <PianoComposerDelegate>
 
+@interface RNPianoComposer (PianoDelegate) <PianoComposerDelegate, PianoShowTemplateDelegate>
 @end
+
 
 @implementation RNPianoComposer
 
-@synthesize showLoginHandler;
-@synthesize showTemplateHandler;
 @synthesize eventParameters;
+
+
+BOOL _hasListeners;
+
 
 RCT_EXPORT_MODULE(PianoComposer)
 
@@ -26,16 +29,11 @@ RCT_EXPORT_METHOD(
                   contentSection:(nullable NSString *)contentSection
                   customVariables:(nullable NSDictionary *)customnVariables
                   userToken:(nullable NSString *)userToken
-                  showLoginHandler:(RCTResponseSenderBlock)showLoginHandler
-                  showTemplateHandler:(RCTResponseSenderBlock)showTemplateHandler
                   )
 {
     [self setEventParameters:[NSMutableDictionary new]];
-    [self setShowLoginHandler:showLoginHandler];
-    [self setShowTemplateHandler:showTemplateHandler];
-
-    PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     
+    PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     [composer setDelegate:self];
     
     if(tags.count > 0) {
@@ -72,10 +70,30 @@ RCT_EXPORT_METHOD(
     [composer execute];
 }
 
+- (NSDictionary *)constantsToExport {
+  return @{ @"eventName": "com.gn.pianoComposer.eventName"};
+}
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[showLoginEventName,
+             showTemplateEventName,
+             onRegisterEventName,
+             onLoginEventName];
+}
+
+- (void)startObserving {
+  _hasListeners = YES;
+}
+
+- (void)stopObserving {
+  _hasListeners = NO;
+}
+
+
 #pragma mark - piano delegate
 
 -(void)showLoginWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowLoginEventParams *)params {
-    self.showLoginHandler(@[]);
+    [self sendEventWithName:showLoginEventName body:nil];
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
@@ -83,8 +101,10 @@ RCT_EXPORT_METHOD(
     [self.eventParameters setObject:@(params.showCloseButton) forKey:@"showCloseButton"];
     
     PianoShowTemplateController *showTemplate = [[PianoShowTemplateController alloc] initWithParams:params];
+    [showTemplate setDelegate:self];
     [showTemplate show];
-    self.showTemplateHandler(@[self.eventParameters]);
+    
+    [self sendEventWithName:showTemplateEventName body:self.eventParameters];
 }
 
 -(void)userSegmentTrueWithComposer:(PianoComposer *)composer event:(XpEvent *)event {
@@ -115,4 +135,15 @@ RCT_EXPORT_METHOD(
 }
 
 
+#pragma mark - piano show template delegate
+
+-(void)onRegisterWithEventData:(id)eventData {
+    [self sendEventWithName:onRegisterEventName body:nil];
+}
+
+-(void)onLoginWithEventData:(id)eventData {
+    [self sendEventWithName:onLoginEventName body:nil];
+}
+
 @end
+
