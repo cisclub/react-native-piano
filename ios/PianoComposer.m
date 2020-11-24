@@ -10,6 +10,8 @@
 @implementation RNPianoComposer
 
 @synthesize eventParameters;
+@synthesize showLoginHandler;
+@synthesize showTemplateHandler;
 
 
 BOOL _hasListeners;
@@ -29,9 +31,13 @@ RCT_EXPORT_METHOD(
                   contentSection:(nullable NSString *)contentSection
                   customVariables:(nullable NSDictionary *)customnVariables
                   userToken:(nullable NSString *)userToken
+                  showLoginHandler:(RCTResponseSenderBlock)showLoginHandler
+                  showTemplateHandler:(RCTResponseSenderBlock)showTemplateHandler
                   )
 {
     [self setEventParameters:[NSMutableDictionary new]];
+    [self setShowLoginHandler:showLoginHandler];
+    [self setShowTemplateHandler:showTemplateHandler];
     
     PianoComposer *composer = [[PianoComposer alloc] initWithAid:AID sandbox:sandbox];
     [composer setDelegate:self];
@@ -93,7 +99,9 @@ RCT_EXPORT_METHOD(
 #pragma mark - piano delegate
 
 -(void)showLoginWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowLoginEventParams *)params {
-    [self sendEventWithName:showLoginEventName body:nil];
+    if (self.showLoginHandler != nil) {
+        self.showLoginHandler(@[]);
+    }
 }
 
 -(void)showTemplateWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowTemplateEventParams *)params {
@@ -104,7 +112,9 @@ RCT_EXPORT_METHOD(
     [showTemplate setDelegate:self];
     [showTemplate show];
     
-    [self sendEventWithName:showTemplateEventName body:self.eventParameters];
+    if (self.showTemplateHandler != nil) {
+        self.showTemplateHandler(@[self.eventParameters]);
+    }
 }
 
 -(void)userSegmentTrueWithComposer:(PianoComposer *)composer event:(XpEvent *)event {
