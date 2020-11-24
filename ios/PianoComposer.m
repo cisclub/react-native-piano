@@ -15,6 +15,7 @@
 
 
 BOOL _hasListeners;
+static NSString *eventName = @"com.gn.pianoComposer.eventName";
 
 
 RCT_EXPORT_MODULE(PianoComposer)
@@ -77,14 +78,11 @@ RCT_EXPORT_METHOD(
 }
 
 - (NSDictionary *)constantsToExport {
-  return @{ @"eventName": "com.gn.pianoComposer.eventName"};
+  return @{ @"eventName": eventName};
 }
 
 - (NSArray<NSString *> *)supportedEvents {
-    return @[showLoginEventName,
-             showTemplateEventName,
-             onRegisterEventName,
-             onLoginEventName];
+    return @[eventName];
 }
 
 - (void)startObserving {
@@ -148,11 +146,11 @@ RCT_EXPORT_METHOD(
 #pragma mark - piano show template delegate
 
 -(void)onRegisterWithEventData:(id)eventData {
-    [self sendEventWithName:onRegisterEventName body:nil];
+    [self sendEventWithName:eventName body:nil];
 }
 
 -(void)onLoginWithEventData:(id)eventData {
-    [self sendEventWithName:onLoginEventName body:nil];
+    [self sendEventWithName:eventName body:nil];
 }
 
 @end
