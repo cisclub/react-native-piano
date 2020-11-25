@@ -35,10 +35,18 @@ const PianoComposer = {
             );
     },
 
+    closeTemplateController() {
+        PianoComposerModule.closeTemplateController()
+    }
+
     addEventListener(eventName, callback = () => {}) {
         const subscribe = eventEmitter.addListener(eventName, callback);
         return subscribe
     },
+
+    removeEventListener(eventName) {
+        eventEmitter.removeAllListeners(eventName);
+    }
 }
 
 export default PianoComposer;

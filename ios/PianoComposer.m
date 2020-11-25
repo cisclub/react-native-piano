@@ -12,6 +12,7 @@
 @synthesize eventParameters;
 @synthesize showLoginHandler;
 @synthesize showTemplateHandler;
+@synthesize presentTemplateController;
 
 
 BOOL _hasListeners;
@@ -77,6 +78,12 @@ RCT_EXPORT_METHOD(
     [composer execute];
 }
 
+RCT_EXPORT_METHOD(closeTemplateController) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.presentTemplateController close];
+    });
+}
+
 - (NSArray<NSString *> *)supportedEvents {
     return @[eventName];
 }
@@ -102,7 +109,8 @@ RCT_EXPORT_METHOD(
     
     [self.eventParameters setObject:@(params.showCloseButton) forKey:@"showCloseButton"];
     
-    PianoShowTemplateController *showTemplate = [[PianoShowTemplateController alloc] initWithParams:params];
+    PianoShowTemplatePopupViewController *showTemplate = [[PianoShowTemplatePopupViewController alloc] initWithParams:params];
+    [self setPresentTemplateController:showTemplate];
     [showTemplate setDelegate:self];
     [showTemplate show];
     
