@@ -15,7 +15,7 @@
 
 
 BOOL _hasListeners;
-static NSString *eventName = @"com.gn.pianoComposer.eventName";
+static NSString *eventName = @"ShowLoginListener";
 
 
 RCT_EXPORT_MODULE(PianoComposer)
@@ -75,10 +75,6 @@ RCT_EXPORT_METHOD(
     }
     
     [composer execute];
-}
-
-- (NSDictionary *)constantsToExport {
-  return @{ @"eventName": eventName};
 }
 
 - (NSArray<NSString *> *)supportedEvents {

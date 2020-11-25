@@ -35,11 +35,9 @@ const PianoComposer = {
             );
     },
 
-    addEventListener(callback = () => {}) {
-        const subscribe = eventEmitter.addListener(PianoComposerModule.eventName, callback);
-        return () => {
-            subscribe.remove();
-        };
+    addEventListener(eventName, callback = () => {}) {
+        const subscribe = eventEmitter.addListener(eventName, callback);
+        return subscribe
     },
 }
 
