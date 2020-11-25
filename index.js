@@ -37,7 +37,7 @@ const PianoComposer = {
 
     closeTemplateController() {
         PianoComposerModule.closeTemplateController()
-    }
+    },
 
     addEventListener(eventName, callback = () => {}) {
         const subscribe = eventEmitter.addListener(eventName, callback);
