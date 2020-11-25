@@ -101,7 +101,7 @@ RCT_EXPORT_METHOD(closeTemplateController) {
 
 -(void)showLoginWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowLoginEventParams *)params {
     if (self.showLoginHandler != nil) {
-        self.showLoginHandler(@[]);
+        self.showLoginHandler(@[self.eventParameters]);
     }
 }
 
