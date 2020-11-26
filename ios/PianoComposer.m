@@ -16,7 +16,7 @@
 
 
 BOOL _hasListeners;
-static NSString *eventName = @"ShowLoginListener";
+static NSString *eventName = @"PIANO_LISTENER";
 
 
 RCT_EXPORT_MODULE(PianoComposer)
@@ -150,11 +150,17 @@ RCT_EXPORT_METHOD(closeTemplateController) {
 #pragma mark - piano show template delegate
 
 -(void)onRegisterWithEventData:(id)eventData {
-    [self sendEventWithName:eventName body:nil];
+    [self sendEventWithName:eventName body:@{
+        @"eventName": @"templateCustomEvent",
+        @"eventData": @{@"eventName": @"register"}
+    }];
 }
 
 -(void)onLoginWithEventData:(id)eventData {
-    [self sendEventWithName:eventName body:nil];
+    [self sendEventWithName:eventName body:@{
+        @"eventName": @"templateCustomEvent",
+        @"eventData": @{@"eventName": @"login"}
+    }];
 }
 
 @end
