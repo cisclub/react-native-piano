@@ -135,6 +135,11 @@ RCT_EXPORT_METHOD(closeTemplateController) {
 }
 
 -(void)meterExpiredWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(PageViewMeterEventParams *)params {
+    [self.eventParameters setObject:params.meterName forKey:@"meterName"];
+    [self.eventParameters setObject:@(params.views) forKey:@"views"];
+    [self.eventParameters setObject:@(params.viewsLeft) forKey:@"viewsLeft"];
+    [self.eventParameters setObject:@(params.maxViews) forKey:@"maxViews"];
+    [self.eventParameters setObject:@(params.totalViews) forKey:@"totalViews"];
 }
 
 -(void)experienceExecuteWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ExperienceExecuteEventParams *)params {
