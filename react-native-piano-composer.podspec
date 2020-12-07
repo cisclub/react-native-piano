@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "PianoComposer"
+  s.dependency "PianoComposer", "> 2.3.9"
   
 end
 
