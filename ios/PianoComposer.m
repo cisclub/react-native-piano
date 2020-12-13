@@ -17,6 +17,8 @@
 
 BOOL _hasListeners;
 static NSString *eventName = @"PIANO_LISTENER";
+static const float popViewPreferredWidth = 600;
+static const float popViewPreferredHeight = 730;
 
 
 RCT_EXPORT_MODULE(PianoComposer)
@@ -110,6 +112,10 @@ RCT_EXPORT_METHOD(closeTemplateController) {
     [self.eventParameters setObject:@(params.showCloseButton) forKey:@"showCloseButton"];
     
     PianoShowTemplatePopupViewController *showTemplate = [[PianoShowTemplatePopupViewController alloc] initWithParams:params];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        [showTemplate setPreferredContentSize:CGSizeMake(popViewPreferredWidth, popViewPreferredHeight)];
+    }
     [self setPresentTemplateController:showTemplate];
     [showTemplate setDelegate:self];
     [showTemplate show];
@@ -169,4 +175,5 @@ RCT_EXPORT_METHOD(closeTemplateController) {
 }
 
 @end
+
 
