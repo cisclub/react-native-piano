@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "PianoComposer", :git => 'https://github.com/cisclub/piano-sdk-for-ios.git'
+  s.dependency "PianoComposer"
   
 end
 
