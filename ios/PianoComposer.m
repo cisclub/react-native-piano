@@ -111,6 +111,7 @@ RCT_EXPORT_METHOD(closeTemplateController) {
     
     [self.eventParameters setObject:@(params.showCloseButton) forKey:@"showCloseButton"];
     
+    [params setShowCloseButton:false]; // Workaround to fix showCloseButton issue in Piano SDK
     PianoShowTemplatePopupViewController *showTemplate = [[PianoShowTemplatePopupViewController alloc] initWithParams:params];
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
     {
@@ -171,6 +172,13 @@ RCT_EXPORT_METHOD(closeTemplateController) {
     [self sendEventWithName:eventName body:@{
         @"eventName": @"templateCustomEvent",
         @"eventData": @{@"eventName": @"login"}
+    }];
+}
+
+-(void)onCustomEventWithEventData:(id)eventData {
+    [self sendEventWithName:eventName body:@{
+        @"eventName": @"templateCustomEvent",
+        @"eventData": @{@"eventName": eventData[@"eventName"]}
     }];
 }
 
