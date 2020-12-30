@@ -47,6 +47,12 @@ RCT_EXPORT_METHOD(
     [composer setDelegate:self];
     
     if(tags.count > 0) {
+        for (id tag in tags) {
+            if ([tag isEqual:[NSNull null]]) {
+                @throw @"RNPianoComposer: While calling [PianoComposer \
+                executeWithAID:sandbox:tags:...] All values of tags must not be NSNull";
+            }
+        }
         [composer setTags:tags];
     }
     if(zoneID != nil) {
