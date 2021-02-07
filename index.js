@@ -18,9 +18,11 @@ const PianoComposer = {
     showLoginHandler = () => {},
     showTemplateHandler = () => {}
     ) {
-        tags = tags.filter((element) => {
-            return element != null;
-        });
+        if(tags !== null) {
+            tags = tags.filter((element) => {
+                return element != null;
+            });
+        }
         PianoComposerModule.executeWithAID(
             aid,
             sandbox,
