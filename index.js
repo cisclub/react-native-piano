@@ -40,8 +40,8 @@ const PianoComposer = {
             );
     },
 
-    closeTemplateController() {
-        PianoComposerModule.closeTemplateController()
+    closeTemplateControllerWithCompleteHandler(completeHandler = () => {}) {
+        PianoComposerModule.closeTemplateControllerWithCompleteHandler(completeHandler);
     },
 
     addEventListener(eventName, callback = () => {}) {

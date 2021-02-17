@@ -86,9 +86,14 @@ RCT_EXPORT_METHOD(
     [composer execute];
 }
 
-RCT_EXPORT_METHOD(closeTemplateController) {
+RCT_EXPORT_METHOD(closeTemplateControllerWithCompleteHandler:(RCTResponseSenderBlock)completeHandler) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.presentTemplateController close];
+        [self.presentTemplateController dismissViewControllerAnimated:YES
+                                                           completion:^{
+            if(completeHandler) {
+                completeHandler(@[]);
+            }
+        }];
     });
 }
 
