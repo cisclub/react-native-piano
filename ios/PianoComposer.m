@@ -114,8 +114,9 @@ RCT_EXPORT_METHOD(closeTemplateControllerWithCompleteHandler:(RCTResponseSenderB
 
 -(void)showLoginWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowLoginEventParams *)params {
     if (self.showLoginHandler != nil) {
-        @try {
-            self.showLoginHandler(@[self.eventParameters]); // To avoid crash if experince shows login multiple times
+        @try { // To avoid crash if experince shows login multiple times
+            self.showLoginHandler(@[self.eventParameters]);
+            [self setShowLoginHandler:nil]; // To avoid calling handler twice
         } @catch (NSException *exception) {}
     }
 }
@@ -134,7 +135,10 @@ RCT_EXPORT_METHOD(closeTemplateControllerWithCompleteHandler:(RCTResponseSenderB
     [showTemplate show];
     
     if (self.showTemplateHandler != nil) {
-        self.showTemplateHandler(@[self.eventParameters]);
+        @try {  // To avoid crash if experince shows login multiple times
+            self.showTemplateHandler(@[self.eventParameters]);
+            [self setShowTemplateHandler:nil]; // To avoid calling handler twice
+        } @catch (NSException *exception) {}
     }
 }
 
