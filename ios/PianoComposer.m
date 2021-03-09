@@ -114,7 +114,9 @@ RCT_EXPORT_METHOD(closeTemplateControllerWithCompleteHandler:(RCTResponseSenderB
 
 -(void)showLoginWithComposer:(PianoComposer *)composer event:(XpEvent *)event params:(ShowLoginEventParams *)params {
     if (self.showLoginHandler != nil) {
-        self.showLoginHandler(@[self.eventParameters]);
+        @try {
+            self.showLoginHandler(@[self.eventParameters]); // To avoid crash if experince shows login multiple times
+        } @catch (NSException *exception) {}
     }
 }
 
